@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>E.T. Transpo</title>
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/jquery-3.3.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Intergalactic E.T. Transpo</h1>
+    <h2>Faster than you can phone home!</h2>
+  </header>
+
+  <div class="main-content">
+
+    <section id="current-schedule">
+      <h3>Current Schedule</h3>
+      <div class="table-pad">
+        <table>
+          <thead>
+            <tr>
+              <th>Vessel Name</th>
+              <th>Vessel Type</th>
+              <th>Destination</th>
+              <th>Frequency (min)</th>
+              <th>Next Arrival</th>
+              <th>Minutes Away</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="vessel-form">
+      <h3>Add Vessel</h3>
+      <form>
+        <label for="name-input">Vessel Name</label>
+        <input type="text" class="input-field" id="name-input">
+
+        <label for="type-input">Vessel Type</label>
+        <input type="text" class="input-field" id="type-input">
+
+        <label for="destination-input">Destination</label>
+        <input type="text" class="input-field" id="dest-input">
+
+        <label for="first-time-input">First Vessel Time (2400 - 24-hour time)</label>
+        <input type="text" maxlength="4" class="input-field" id="time-input">
+
+        <label for="frequency-input">Frequency (min)</label>
+        <input type="number" class="input-field" id="freq-input">
+        <input type="submit" value="Submit" id="vessel-form-btn">
+      </form>
+    </section>
+
+  </div>
+
+  <footer>
+    &#9400;Copyright 2018 Keith Allmon
+  </footer>
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

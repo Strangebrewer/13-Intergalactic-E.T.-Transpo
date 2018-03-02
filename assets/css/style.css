@@ -1,0 +1,119 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #000;
+  color: #777;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  flex-shrink: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+.main-content {
+  flex: 1 0 auto;
+  margin: auto;
+}
+
+footer {
+  flex-shrink: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 6em;
+}
+
+h2 {
+  font-size: 3.5em;
+  font-style: italic;
+}
+
+section {
+  border: 2px solid #12406b;
+  margin: 30px;
+  width: 1100px;
+}
+
+section h3 {
+  padding: 15px;
+  background: linear-gradient(to right, #000, 40%, #0d3152);
+  border-bottom: 2px solid #12406b;
+}
+
+.table-pad {
+  padding: 15px 15px 30px 15px;
+}
+
+th {
+  font-weight: bold;
+  text-align: left;
+  padding: 5px 0 15px 0;
+}
+
+th, td {
+  width: 158px;
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 15px;
+  width: 280px;
+}
+
+tr {
+  border-bottom: 1px solid #666;
+}
+
+tr:last-child {
+  border: none;
+}
+
+.tbody-row td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.td-indent {
+  padding-left: 20px;
+}
+
+#vessel-form h3,
+#vessel-form label,
+#vessel-form input {
+  display: block;
+}
+
+#vessel-form form {
+  padding: 15px;
+}
+
+#vessel-form label {
+  padding: 15px 0 5px 0;
+  font-weight: bold;
+}
+
+#vessel-form label:first-child {
+  padding-top: 0;
+}
+
+#vessel-form-btn {
+  margin-top: 15px;
+  padding: 5px 10px;
+}
+
+.input-field {
+  min-width: 100%;
+  max-width: 100%;
+}
