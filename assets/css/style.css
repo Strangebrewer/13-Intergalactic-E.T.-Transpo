@@ -47,6 +47,8 @@ section {
 }
 
 section h3 {
+  font-size: 1.5em;
+  font-weight: bold;
   padding: 15px;
   background: linear-gradient(to right, #000, 40%, #0d3152);
   border-bottom: 2px solid #12406b;
@@ -56,37 +58,35 @@ section h3 {
   padding: 15px 15px 30px 15px;
 }
 
-th {
-  font-weight: bold;
-  text-align: left;
-  padding: 5px 0 15px 0;
+table {
+  table-layout: fixed;
+  width: 100%;
 }
 
-th, td {
-  width: 158px;
+th {
+  font-size: 1.15em;
+  font-weight: bold;
+  text-align: left;
+  padding: 5px 15px 15px 0;
+  text-overflow: ellipsis;
 }
 
 th:first-child,
 td:first-child {
-  padding-left: 15px;
-  width: 280px;
+  width: 220px;
 }
 
 tr {
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid rgba(77, 77, 77, 0.712);
 }
 
-tr:last-child {
+tbody tr:last-child {
   border: none;
 }
 
 .tbody-row td {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.td-indent {
-  padding-left: 20px;
+  padding: 10px 15px 10px 10px;
+  text-overflow: ellipsis;
 }
 
 #vessel-form h3,
@@ -101,6 +101,7 @@ tr:last-child {
 
 #vessel-form label {
   padding: 15px 0 5px 0;
+  font-size: 1.15em;
   font-weight: bold;
 }
 

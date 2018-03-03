@@ -1,4 +1,3 @@
-// Initialize Firebase
 var config = {
   apiKey: "AIzaSyBgKlouqsmcIib8pLbCMI3nxpH84jKZbZY",
   authDomain: "et-vessel-schedule.firebaseapp.com",
@@ -20,60 +19,62 @@ $("#vessel-form-btn").on("click", function (event) {
   var inputTime = $("#time-input").val().trim();
   var inputFreq = $("#freq-input").val().trim();
 
-  var newVessel = {
-    name: inputName
-    , type: inputType
-    , dest: inputDest
-    , time: inputTime
-    , freq: inputFreq
-    , dateAdded: firebase.database.ServerValue.TIMESTAMP
+  //  calculating timeUntil so I can disallow invalid times below
+  //  These will be calculated again in the "child_added" listener below - at least until I can figure out if one is better than the other for continuous time updates
+  var convertedTime = moment(inputTime, "HH:mm");
+  var diffTime = moment().diff(moment(convertedTime), "minutes");
+  var tRemainder = diffTime % inputFreq;
+  var timeUntil = inputFreq - tRemainder;
+  
+  //  Form field validation
+  //  Disallow empty fields
+  if (inputName === "" || inputType === "" || inputDest === "" || inputTime === "" || inputFreq === "") {
+    $("#form-header").html("Add Vessel");
+    $("#form-header").append("<span style='color: red'>&nbsp; - You must fill out all fields</span>");
   }
+  //  Disallow invalid times by checking if timeUntil resolves to NaN
+  else if (isNaN(timeUntil)) {
+    $("#form-header").html("Add Vessel");
+    $("#time-input").val("");
+    $("#form-header").append("<span style='color: red'>&nbsp; - You must specify a valid 24-hour time</span>");
+  }
+  //  If all fields validate, create object and push to firebase
+  else {
+    $("#form-header").html("Add Vessel");
 
-  alienDb.ref().push(newVessel);
+    //  Create database object
+    var newVessel = {
+      name: inputName
+      , type: inputType
+      , dest: inputDest
+      , time: inputTime
+      , freq: inputFreq
+      , dateAdded: firebase.database.ServerValue.TIMESTAMP
+    }
 
-  $("#name-input").val("");
-  $("#type-input").val("");
-  $("#dest-input").val("");
-  $("#time-input").val("");
-  $("#freq-input").val("");
+    //  Push to firebase
+    alienDb.ref().push(newVessel);
+
+    //  Clear all input fields
+    $("#name-input").val("");
+    $("#type-input").val("");
+    $("#dest-input").val("");
+    $("#time-input").val("");
+    $("#freq-input").val("");
+  }
 
 });
 
-// function update() {
-//   $("#table-body").html("");
-  alienDb.ref().on("child_added", function (childSnapShot, prevChildKey) {
-    var outputName = childSnapShot.val().name;
-    var outputType = childSnapShot.val().type;
-    var outputDest = childSnapShot.val().dest;
-    var outputFreq = childSnapShot.val().freq;
-    var firstTime = childSnapShot.val().time;
-    var convertedTime = moment(firstTime, "HH:mm").subtract(1, "years");
-    var diffTime = moment().diff(moment(convertedTime), "minutes");
-    var tRemainder = diffTime % outputFreq;
-    var timeUntil = outputFreq - tRemainder;
-    var nextArrival = moment().add(timeUntil, "minutes").format("h:mm a");
-    $("#table-body").append("<tr class='tbody-row'><td>" + outputName + "</td><td>" + outputType + "</td><td>" + outputDest + "</td><td class='td-indent'>" + outputFreq + "</td><td class='td-indent' id='next-arrival'>" + nextArrival + "</td><td class='td-indent' id='time-until'>" + timeUntil + "</td></tr>");
-  });
-// }
-
-// $(window).ready( function (){
-//   update();
-//   setInterval(update, 5000);
-// })
-
-// // function update() {
-// //   $('#clock').html(moment().format('D. MMMM YYYY H:mm:ss'));
-// // }
-// //   setInterval(update, 1000);
-
-// var alienDbTime = moment(convertedTime, "X").format("h:mm a");
-
-// alienDb.ref().on("value", function (snapshot) {
-//   $("#next-arrivl").html(snapshot.val().nextArrival);
-//   $("#time-until").html(snapshot.val().timeUntil);
-// });
-
-// function update() {
-//   //  update firebase timeInterval
-// }
-// setInterval(update, 1000);
+alienDb.ref().on("child_added", function (childSnapShot, prevChildKey) {
+  var outputName = childSnapShot.val().name;
+  var outputType = childSnapShot.val().type;
+  var outputDest = childSnapShot.val().dest;
+  var outputFreq = childSnapShot.val().freq;
+  var firstTime = childSnapShot.val().time;
+  var convertedTime = moment(firstTime, "HH:mm");
+  var diffTime = moment().diff(moment(convertedTime), "minutes");
+  var tRemainder = diffTime % outputFreq;
+  var timeUntil = outputFreq - tRemainder;
+  var nextArrival = moment().add(timeUntil, "minutes").format("h:mm a");
+  $("#table-body").append("<tr class='tbody-row'><td>" + outputName + "</td><td>" + outputType + "</td><td>" + outputDest + "</td><td class='td-indent'>" + outputFreq + "</td><td class='td-indent' id='next-arrival'>" + nextArrival + "</td><td class='td-indent' id='time-until'>" + timeUntil + "</td></tr>");
+});
