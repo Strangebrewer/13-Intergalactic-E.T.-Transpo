@@ -45,7 +45,7 @@ $("#vessel-form-btn").on("click", function (event) {
   var inputFreq = $("#freq-input").val().trim();
 
   //  Calculate timeUntil so I can disallow invalid (isNaN) time input in the form
-  var convertedTime = moment(inputTime, "HH:mm");
+  var convertedTime = moment(inputTime, "HH:mm").subtract(1, "years");
   //  Calc the difference between first vessel and current time
   var diffTime = moment().diff(moment(convertedTime), "minutes");
   //  Calc remainder of time difference / frequency
@@ -105,30 +105,29 @@ function tableUpdate() {
   for (let i = 0; i < vesselsOnPage.length; i++) {
     const element = vesselsOnPage[i];
     //  Convert time input to military time format
-    var convertedTime = moment(element.time, "HH:mm");
+    var convertedTime = moment(element.time, "HH:mm").subtract(1, "years");
     //  Calc the difference between first vessel and current time
     var diffTime = moment().diff(moment(convertedTime), "minutes");
     //  Calc remainder of time difference / frequency
     var tRemainder = diffTime % element.freq;
     //  Set empty variables and set them in conditional statement below
-    var timeUntil;
-    var nextArrival;
-    var future = "";
+    var timeUntil = element.freq - tRemainder;
+    var nextArrival = moment().add(timeUntil, "minutes").format("h:mm a");
 
-    // Conditional to handle the apparent fact that first arrivals occurring in the future subtract 1 from the time
-    if (convertedTime > moment()) {
-      //  For future first arrivals, times are fairly straightforward
-      timeUntil = moment(convertedTime).diff(moment(), "minutes") + 1;
-      nextArrival = convertedTime.format("h:mm a");
-      future = "&nbsp;*";
-    }
-    else {
-      //  For past first arrivals, frequency minus remainder equals time until next vessel
-      timeUntil = element.freq - tRemainder;
-      nextArrival = moment().add(timeUntil, "minutes").format("h:mm a");
-    }
+    // // Conditional to handle the apparent fact that first arrivals occurring in the future subtract 1 from the time
+    // if (convertedTime > moment()) {
+    //   //  For future first arrivals, times are fairly straightforward
+    //   timeUntil = moment(convertedTime).diff(moment(), "minutes") + 1;
+    //   nextArrival = convertedTime.format("h:mm a");
+    //   future = "&nbsp;*";
+    // }
+    // else {
+    //   //  For past first arrivals, frequency minus remainder equals time until next vessel
+    //   timeUntil = element.freq - tRemainder;
+    //   nextArrival = moment().add(timeUntil, "minutes").format("h:mm a");
+    // }
     //  Pull name, type, dest, and freq from the array, but nextArrival and timeUntil are calculated locally with each interval to keep them up to date.
-    $("#table-body").append("<tr class='tbody-row'><td><button class='rmv-btn' data-index='" + i + "'>X</button></td><td>" + element.name + "</td><td>" + element.type + "</td><td>" + element.dest + "</td><td>" + element.freq + "</td><td id='next-arrival'>" + nextArrival + future + "</td><td id='time-until'>" + timeUntil + "</td></tr>");
+    $("#table-body").append("<tr class='tbody-row'><td><button class='rmv-btn' data-index='" + i + "'>X</button></td><td>" + element.name + "</td><td>" + element.type + "</td><td>" + element.dest + "</td><td>" + element.freq + "</td><td id='next-arrival'>" + nextArrival + "</td><td id='time-until'>" + timeUntil + "</td></tr>");
   }
 }
 

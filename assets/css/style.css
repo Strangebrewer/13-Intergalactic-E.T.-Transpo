@@ -74,7 +74,7 @@ th {
   font-size: 1.15em;
   font-weight: bold;
   text-align: left;
-  padding: 5px 15px 5px 0;
+  padding: 5px 15px 15px 0;
   text-overflow: ellipsis;
 }
 
@@ -88,12 +88,8 @@ td:nth-child(2) {
   width: 220px;
 }
 
-#mini-th {
-  font-size: .65em;
-}
-
 tr {
-  border-bottom: 1px solid rgba(77, 77, 77, 0.712);
+  border-bottom: 1px solid #4d4d4db6;
 }
 
 tbody tr:last-child {
@@ -131,6 +127,9 @@ tbody tr:last-child {
 }
 
 .input-field {
+  background-color: #cecece;
+  border: 2px solid #12406b;
   min-width: 100%;
   max-width: 100%;
+  padding: 5px;
 }
