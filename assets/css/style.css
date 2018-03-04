@@ -54,6 +54,13 @@ section h3 {
   border-bottom: 2px solid #12406b;
 }
 
+#reset {
+  color: #ff0000;
+  float: right;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: .8em;
+}
+
 .table-pad {
   padding: 15px 15px 30px 15px;
 }
@@ -67,13 +74,22 @@ th {
   font-size: 1.15em;
   font-weight: bold;
   text-align: left;
-  padding: 5px 15px 15px 0;
+  padding: 5px 15px 5px 0;
   text-overflow: ellipsis;
 }
 
 th:first-child,
 td:first-child {
+  width: 50px;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
   width: 220px;
+}
+
+#mini-th {
+  font-size: .65em;
 }
 
 tr {
