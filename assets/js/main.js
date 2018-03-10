@@ -147,6 +147,8 @@ $("#reset-btn").on("click", function () {
   newDbObject("Subway to Venus", "Luxury Yacht", "New Sri Lanka, Venus", "2345", "30");
   newDbObject("Muthaship to Mars", "Mothership", "Olympus Mons", "1200", "2880");
   newDbObject("The Large Marge Barge", "Garbage Barge", "Sector Xk-98a, aka 'The Dump'", "0600", "120");
+  newDbObject("Iono", "Query Trawler", "Knowledge!", "0830", "90");
+  newDbObject("Windy Pete", "Spa Ship", "Black Rock Desert", "0000", "180");
 });
 
 setTimeout(tableUpdate, 1000);
