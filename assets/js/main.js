@@ -60,6 +60,11 @@ $("#vessel-form-btn").on("click", function (event) {
     $("#form-header").html("Add Vessel");
     $("#form-header").append("<span style='color: #ff0000'>&nbsp; - You must fill out all fields</span>");
   }
+  else if (inputFreq <= 0) {
+    $("#form-header").html("Add Vessel");
+    $("#form-header").append("<span style='color: #ff0000'>&nbsp; - You must specify a valid frequency</span>");
+    $("#freq-input").val("");
+  }
   //  Disallow invalid times by checking if timeUntil resolves to NaN
   else if (isNaN(timeUntil)) {
     $("#form-header").html("Add Vessel");
@@ -114,20 +119,8 @@ function tableUpdate() {
     var timeUntil = element.freq - tRemainder;
     var nextArrival = moment().add(timeUntil, "minutes").format("h:mm a");
 
-    // // Conditional to handle the apparent fact that first arrivals occurring in the future subtract 1 from the time
-    // if (convertedTime > moment()) {
-    //   //  For future first arrivals, times are fairly straightforward
-    //   timeUntil = moment(convertedTime).diff(moment(), "minutes") + 1;
-    //   nextArrival = convertedTime.format("h:mm a");
-    //   future = "&nbsp;*";
-    // }
-    // else {
-    //   //  For past first arrivals, frequency minus remainder equals time until next vessel
-    //   timeUntil = element.freq - tRemainder;
-    //   nextArrival = moment().add(timeUntil, "minutes").format("h:mm a");
-    // }
     //  Pull name, type, dest, and freq from the array, but nextArrival and timeUntil are calculated locally with each interval to keep them up to date.
-    $("#table-body").append("<tr class='tbody-row'><td><button class='rmv-btn' data-index='" + i + "'>X</button></td><td>" + element.name + "</td><td>" + element.type + "</td><td>" + element.dest + "</td><td>" + element.freq + "</td><td id='next-arrival'>" + nextArrival + "</td><td id='time-until'>" + timeUntil + "</td></tr>");
+    $("#table-body").append("<tr class='tbody-row'><td><button class='btn rmv-btn' data-index='" + i + "'>X</button></td><td>" + element.name + "</td><td>" + element.type + "</td><td>" + element.dest + "</td><td>" + element.freq + "</td><td id='next-arrival'>" + nextArrival + "</td><td id='time-until'>" + timeUntil + "</td></tr>");
   }
 }
 
@@ -156,6 +149,6 @@ $("#reset-btn").on("click", function () {
   newDbObject("The Large Marge Barge", "Garbage Barge", "Sector Xk-98a, aka 'The Dump'", "0600", "120");
 });
 
-tableUpdate();
+setTimeout(tableUpdate, 1000);
 
 setInterval(tableUpdate, 1000);
