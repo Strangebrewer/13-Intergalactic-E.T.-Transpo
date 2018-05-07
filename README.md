@@ -2,10 +2,10 @@
   
 ## Table of contents
   
-### [1-Description](https://github.com/Strangebrewer/RepoName#Description)
-### [2-Technologies](https://github.com/Strangebrewer/RepoName#Technologies)
-### [3-Challenges](https://github.com/Strangebrewer/RepoName#Challenges)
-### [4-Contributors](https://github.com/Strangebrewer/RepoName#Contributors)
+### 1-Description
+### 2-Technologies
+### 3-Challenges
+### 4-Contributors
 
 ### 1-Description
 This project uses Google Firebase and Moment.js to store data on fictional (or are they?) intergalactic vessels and keep track of the arrivals and departures. It's a scheduling app that could be adapted to tracking more realistic events and appointments, or even something like a train schedule.
