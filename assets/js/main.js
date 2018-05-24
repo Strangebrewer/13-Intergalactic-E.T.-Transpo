@@ -120,7 +120,17 @@ function tableUpdate() {
     var nextArrival = moment().add(timeUntil, "minutes").format("h:mm a");
 
     //  Pull name, type, dest, and freq from the array, but nextArrival and timeUntil are calculated locally with each interval to keep them up to date.
-    $("#table-body").append("<tr class='tbody-row'><td><button class='btn rmv-btn' data-index='" + i + "'>X</button></td><td>" + element.name + "</td><td>" + element.type + "</td><td>" + element.dest + "</td><td>" + element.freq + "</td><td id='next-arrival'>" + nextArrival + "</td><td id='time-until'>" + timeUntil + "</td></tr>");
+    $("#table-body").append(`<tr class='tbody-row'>
+    <td><button class='btn rmv-btn' data-index='${i}'>X</button></td>
+    <td><p>${element.name}</p></td>
+    <td><p>Type: ${element.type}</p>
+        <p>Dest: ${element.dest}</p></td>
+    <td><p>Freq: ${element.freq}</p>
+        <p id='next-arrival'>Next: ${nextArrival}</p>
+        <p id='time-until'>Wait: ${timeUntil} min</p></td>
+    </tr>`);
+      
+      // "<tr class='tbody-row'><td><button class='btn rmv-btn' data-index='" + i + "'>X</button></td><td>" + element.name + "</td><td><p>Type: " + element.type + "</p></td>Dest: " + element.dest + "<p>Frequency: " + element.freq + "</p><p id='next-arrival'>Next Arrival: " + nextArrival + "</p><p id='time-until'>Minutes Away: " + timeUntil + "</p></td></tr>");
   }
 }
 
@@ -153,4 +163,4 @@ $("#reset-btn").on("click", function () {
 
 setTimeout(tableUpdate, 1000);
 
-setInterval(tableUpdate, 1000);
+// setInterval(tableUpdate, 1000);
